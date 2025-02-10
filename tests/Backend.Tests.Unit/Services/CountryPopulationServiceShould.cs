@@ -26,7 +26,7 @@ public class CountryPopulationServiceShould
 
 
     [Fact]
-    public async Task GetCountryPopulation_Should_Filter_Standardize_Combine_Db_Stats_Sources()
+    public async Task GetCountryPopulation_Should_Filter_Standardize_And_Combine_Db_Stat_Sources()
     {
         // Arrange 
         var dbCountries = new List<Country>() {
@@ -90,9 +90,11 @@ public class CountryPopulationServiceShould
 
         // Assert
         actualResult.Should().BeEquivalentTo(combinedCountries);
+
         // Data is retrieved
         _mockDbManager.Verify(_ => _.GetCountries(It.IsAny<DbConnection>()), Times.Once());
         _mockStatService.Verify(_ => _.GetCountryPopulationsAsync(), Times.Once());
+
         // Results are filtered and standardized
         _mockCountryStandardizationService.Verify(_ => _.FilterInvalidRecords(It.IsAny<IEnumerable<Country>>()), Times.Exactly(2));
         _mockCountryStandardizationService.Verify(_ => _.GetStandardCountryNames(It.IsAny<IEnumerable<Country>>()), Times.Exactly(2));

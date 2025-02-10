@@ -32,13 +32,13 @@ public class CountryStandardizationServiceShould
         // Arrange
         _mockCountryNameService.Setup(_ => _.GetStandardCountryName("United States of America")).Returns("U.S.A.");
         _mockCountryNameService.Setup(_ => _.GetStandardCountryName("Republic of Bulgaria")).Returns("Bulgaria");
-        _mockCountryNameService.Setup(_ => _.GetStandardCountryName("Tuvalu ")).Returns("Tuvalu");
+        _mockCountryNameService.Setup(_ => _.GetStandardCountryName("Tuvalu")).Returns("Tuvalu");
 
         var countries = new List<Country>()
         {
             new Country("United States of America", 10),
             new Country("Republic of Bulgaria", 9),
-            new Country("Tuvalu ", 8)
+            new Country("Tuvalu", 8)
         };
 
         // Act
